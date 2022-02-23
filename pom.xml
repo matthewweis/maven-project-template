@@ -139,6 +139,9 @@
                             <phase>validate</phase>
                             <configuration>
                                 <rules>
+                                    <requireJavaVersion>
+                                        <version>[_JAVA_VERSION_,)</version>
+                                    </requireJavaVersion>
                                     <bannedDependencies>
                                         <excludes>
                                             <!-- ban all artifacts -->
@@ -245,7 +248,6 @@
                             <phase>test</phase>
                             <configuration>
                                 <excludes>
-<!--                                    <exclude>none</exclude>-->
                                     <exclude>**/*IntegrationTest.java</exclude>
                                     <exclude>**/*IntegrationTests.java</exclude>
                                 </excludes>
