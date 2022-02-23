@@ -11,6 +11,8 @@
     <!-- TODO :: _ARTIFACT_ID_                        ("project-name") ::  --> <!-- TODO REQUIRES FOLDER RENAME -->
     <!-- TODO :: _ARTIFACT_VERSION_                   ("0.1-SNAPSHOT") ::  -->
     <!-- TODO :: _JAVA_VERSION_                      ("1.8" "11" "17") ::  -->
+    <!-- TODO :: _GITHUB_USERNAME_                 ("github-username") ::  -->
+    <!-- TODO :: _GITHUB_REPOSITORY_             ("github-repository") ::  -->
     <!-- todo see https://github.com/felixklauke/maven-project-template -->
 
     <groupId>_GROUP_TLD_._GROUP_DOMAIN_NAME_</groupId>
@@ -58,6 +60,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/_GITHUB_USERNAME_/_GITHUB_REPOSITORY_.git</connection>
+        <developerConnection>scm:git:git@github.com:_GITHUB_USERNAME_/_GITHUB_REPOSITORY_.git</developerConnection>
+        <url>https://github.com/_GITHUB_USERNAME_/_GITHUB_REPOSITORY_/</url>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
