@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- TODO ::                 REPLACEMENT CHECKLIST                 ::  -->
+  <!-- TODO :: ===================================================== ::  -->
+  <!-- TODO :: _GROUP_TLD_                                   ("org") ::  -->
+  <!-- TODO :: _GROUP_DOMAIN_NAME_                       ("example") ::  -->
+  <!-- TODO :: _ARTIFACT_ID_                        ("project-name") ::  -->
+  <!-- TODO :: _ARTIFACT_VERSION_                   ("0.1-SNAPSHOT") ::  -->
+  <!-- TODO :: _JAVA_VERSION_                      ("1.8" "11" "17") ::  -->
+  <!-- TODO :: _GITHUB_USERNAME_                 ("github-username") ::  -->
+  <!-- TODO :: _GITHUB_REPOSITORY_             ("github-repository") ::  -->
+
+  <groupId>${groupId}.${artifactId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <packaging>pom</packaging>
+
+<!--  <name>${name}</name>-->
+<!--  <url>${url}</url>-->
+
+  <modules>
+    <module>api</module>
+    <module>impl</module>
+    <module>tck</module>
+  </modules>
+
+  <properties>
+<!--    <java.version>${java.version}</java.version>-->
+    <java.version>17</java.version>
+
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+    <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+
+    <junit.version>5.7.0</junit.version>
+    <junit-bom.version>${junit.version}</junit-bom.version>
+    <junit-jupiter.version>${junit.version}</junit-jupiter.version>
+    <junit-jupiter-api.version>${junit.version}</junit-jupiter-api.version>
+    <junit-jupiter-engine.version>${junit.version}</junit-jupiter-engine.version>
+    <junit-jupiter-params.version>${junit.version}</junit-jupiter-params.version>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/${github.username}/${github.repository}.git</connection>
+    <developerConnection>scm:git:git@github.com:${github.username}/${github.repository}.git</developerConnection>
+    <url>https://github.com/${github.username}/${github.repository}/</url>
+  </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- modules -->
+      <dependency>
+        <groupId>${groupId}.${rootArtifactId}.api</groupId>
+        <artifactId>api</artifactId>
+        <version>${version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>${groupId}.${rootArtifactId}.impl</groupId>
+        <artifactId>impl</artifactId>
+        <version>${version}</version>
+        <scope>compile</scope>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>${groupId}.${rootArtifactId}.tck</groupId>-->
+<!--        <artifactId>tck</artifactId>-->
+<!--        <version>${version}</version>-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+      <!-- testing -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit-jupiter-api.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit-jupiter-engine.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>${junit-jupiter-params.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${build-helper-maven-plugin.version}</version>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <phase>validate</phase>
+              <configuration>
+                <rules>
+                  <requireJavaVersion>
+                    <version>[${java.version},)</version>
+                  </requireJavaVersion>
+                  <bannedDependencies>
+                    <excludes>
+                      <!-- ban all artifacts -->
+                      <exclude>${groupId}.${rootArtifactId}:${artifactId}:*:*:*</exclude>
+                      <exclude>${groupId}.${rootArtifactId}.api:api:*:*:*</exclude>
+                      <exclude>${groupId}.${rootArtifactId}.impl:impl:*:*:*</exclude>
+                      <exclude>${groupId}.${rootArtifactId}.tck:tck:*:*:*</exclude>
+                      <!-- ban all junit dependencies -->
+                      <exclude>org.junit.jupiter:junit-jupiter:*:*:*</exclude>
+                      <exclude>org.junit.jupiter:junit-jupiter-api:*:*:*</exclude>
+                      <exclude>org.junit.jupiter:junit-jupiter-engine:*:*:*</exclude>
+                      <exclude>org.junit.jupiter:junit-jupiter-params:*:*:*</exclude>
+                    </excludes>
+                    <includes>
+                      <!-- ...unless they match the parent version property -->
+<!--                      <include>${groupId}.${rootArtifactId}:*:[${project.version}]:*:*</include>-->
+                      <include>${groupId}.${rootArtifactId}:${artifactId}:[${project.version}]:pom:*</include>
+                      <include>${groupId}.${rootArtifactId}.api:api:[${project.version}]:jar:*</include>
+                      <include>${groupId}.${rootArtifactId}.impl:impl:[${project.version}]:jar:*</include>
+                      <include>${groupId}.${rootArtifactId}.tck:tck:[${project.version}]:jar:*</include>
+                      <!-- ...unless they match the property versions in junit-bom -->
+                      <include>org.junit.jupiter:junit-jupiter:[${junit-jupiter.version}]:jar:*</include>
+                      <include>org.junit.jupiter:junit-jupiter-api:[${junit-jupiter-api.version}]:jar:*</include>
+                      <include>org.junit.jupiter:junit-jupiter-engine:[${junit-jupiter-engine.version}]:jar:*</include>
+                      <include>org.junit.jupiter:junit-jupiter-params:[${junit-jupiter-params.version}]:jar:*</include>
+                    </includes>
+                    <message>ERROR: invalid project -OR- one or more of junit's dependency versions differs from its junit-bom (${junit-bom.version}): junit-jupiter (${junit-jupiter.version}), junit-jupiter-api (${junit-jupiter-api.version}), junit-jupiter-engine (${junit-jupiter-engine.version}), junit-jupiter-params (${junit-jupiter-params.version}).</message>
+                    <searchTransitive>true</searchTransitive>
+                  </bannedDependencies>
+                </rules>
+                <fail>true</fail>
+                <ignoreCache>true</ignoreCache>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${build-helper-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>remove-old-installers</id>
+              <phase>package</phase>
+              <goals>
+                <goal>remove-project-artifact</goal>
+              </goals>
+              <configuration>
+                <removeAll>true</removeAll>
+              </configuration>
+            </execution>
+            <execution>
+              <id>clean-old-installers</id>
+              <phase>clean</phase>
+              <goals>
+                <goal>remove-project-artifact</goal>
+              </goals>
+              <configuration>
+                <removeAll>true</removeAll>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+              <id>attach-sources</id>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven-javadoc-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+              <id>attach-javadocs</id>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <!-- todo make true-->
+<!--            <failIfNoTests>true</failIfNoTests>-->
+            <failIfNoTests>false</failIfNoTests>
+            <useModulePath>true</useModulePath>
+            <excludes>
+              <exclude>**/*.java</exclude>
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <id>unit-test</id>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <phase>test</phase>
+              <configuration>
+                <excludes>
+                  <exclude>**/*IntegrationTest.java</exclude>
+                  <exclude>**/*IntegrationTests.java</exclude>
+                </excludes>
+                <includes>
+                  <include>**/*Test.java</include>
+                  <include>**/*Tests.java</include>
+                </includes>
+                <!-- todo -->
+                <failIfNoTests>false</failIfNoTests>
+<!--                <failIfNoTests>true</failIfNoTests>-->
+              </configuration>
+            </execution>
+            <execution>
+              <id>integration-test</id>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <phase>integration-test</phase>
+              <configuration>
+                <excludes>
+                  <exclude>none</exclude>
+                </excludes>
+                <includes>
+                  <include>**/*IntegrationTest.java</include>
+                  <include>**/*IntegrationTests.java</include>
+                </includes>
+                <!-- todo -->
+                <failIfNoTests>false</failIfNoTests>
+<!--                <failIfNoTests>true</failIfNoTests>-->
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven-failsafe-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

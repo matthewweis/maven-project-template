@@ -1,0 +1,137 @@
+<archetype-descriptor
+        xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
+        name="maven-project-archetype">
+    <requiredProperties>
+        <requiredProperty key="groupId">
+            <defaultValue>com.example</defaultValue>
+            <validationRegex/>
+        </requiredProperty>
+        <requiredProperty key="artifactId">
+            <defaultValue>project</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="version">
+            <defaultValue>1.0-SNAPSHOT</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="name">
+            <defaultValue>developer</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="url">
+            <defaultValue>https://www.example.com</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="java.version">
+            <defaultValue>17</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="github.username">
+            <defaultValue>ghdev</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="github.repository">
+            <defaultValue>ghrepo</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+    <modules>
+        <module id="api" dir="api" name="api">
+            <fileSets>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+        <module id="impl" dir="impl" name="impl">
+            <fileSets>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+        <module id="tck" dir="tck" name="tck">
+            <fileSets>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet packaged="true" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/module-info.java</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet packaged="false" filtered="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/module-info.java</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+    </modules>
+</archetype-descriptor>

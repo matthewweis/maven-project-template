@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>${groupId}.${rootArtifactId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>${artifactId}</artifactId>
+    <groupId>${groupId}.${rootArtifactId}.${artifactId}</groupId>
+    <version>${version}</version>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-jupiter-params.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper-maven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <fork>true</fork>
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <!-- todo -->
+                    <failIfNoTests>false</failIfNoTests>
+<!--                    <failIfNoTests>true</failIfNoTests>-->
+                    <useModulePath>true</useModulePath>
+<!--                    <argLine>&#45;&#45;add-opens org.junit.platform.commons/org.junit.platform.commons.logging=ALL-UNNAMED &#45;&#45;add-opens org.junit.platform.commons/org.junit.platform.commons.util=ALL-UNNAMED &#45;&#45;add-opens ${groupId}.${rootArtifactId}.api/${groupId}.${rootArtifactId}.api=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.tree=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.processing=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.util=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.code=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.model=${groupId}.${rootArtifactId}.tck &#45;&#45;add-opens jdk.compiler/com.sun.tools.javac.comp=${groupId}.${rootArtifactId}.tck</argLine>-->
+                    <argLine>--add-opens org.junit.platform.commons/org.junit.platform.commons.util=ALL-UNNAMED --add-opens ${groupId}.${rootArtifactId}.api/${groupId}.${rootArtifactId}.api=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.tree=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.processing=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.util=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.code=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.model=${groupId}.${rootArtifactId}.tck --add-opens jdk.compiler/com.sun.tools.javac.comp=${groupId}.${rootArtifactId}.tck</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
